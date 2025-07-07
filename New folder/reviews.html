@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>רשימת ביקורות - המקסיקני</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/branches.css">
+  <link rel="stylesheet" href="css/reviews.css">
+  <link rel="stylesheet" href="css/buttons.css">
+</head>
+<body>
+  <div id="sidebar-placeholder"></div>
+  <div class="main">
+    <div class="header">
+      <h2>רשימת ביקורות</h2>
+      <button class="add-btn btn btn-primary">הוספת ביקורת חדשה</button>
+    </div>
+
+    <div class="filter-box">
+      <div class="filter-header">סינון וחיפוש</div>
+      <div class="filter-row">
+        <input type="text" id="search-input" placeholder="חיפוש לפי כותרת ביקורת...">
+        <select id="type-filter">
+          <option>כל הסוגים</option>
+        </select>
+        <select id="branch-filter">
+          <option>כל הסניפים</option>
+        </select>
+        <div class="review-count">
+          <span id="review-count">0</span> ביקורות
+          <span class="filter-icon">🧾</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="branches-table">
+        <thead>
+          <tr>
+            <th>תאריך</th>
+            <th>סניף</th>
+            <th>סוג ביקורת</th>
+            <th>מבקר</th>
+            <th>ציון</th>
+            <th>פעולות</th>
+          </tr>
+        </thead>
+        <tbody id="reviews-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/reviews.js"></script>
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("sidebar-placeholder").innerHTML = html;
+        const links = document.querySelectorAll('#sidebar-placeholder a');
+        links.forEach(link => {
+          if (link.href.includes('reviews.html')) {
+            link.classList.add('active');
+          }
+        });
+      });
+  </script>
+</body>
+</html>
